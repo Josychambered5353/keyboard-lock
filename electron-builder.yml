@@ -17,9 +17,9 @@ asar: true
 # The app has no native modules, so a rebuild would only slow the pipeline down.
 npmRebuild: false
 
-publish:
-  provider: github
-  releaseType: draft
+# Artifacts are collected and published by .github/workflows/release.yml,
+# not by electron-builder itself.
+publish: null
 
 artifactName: ${name}-${version}-${os}-${arch}.${ext}
 
