@@ -6,7 +6,7 @@ the bar for changes is "does this make locking a keyboard for a wipe better?"
 ## Getting set up
 
 ```bash
-git clone https://github.com/OWNER/keyboard-lock.git
+git clone https://github.com/sayedmahmod/keyboard-lock.git
 cd keyboard-lock
 npm ci
 npm run dev
