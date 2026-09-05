@@ -1,0 +1,10 @@
+# Check every text file out with LF, on every platform. Without this, Windows
+# checkouts get CRLF and Prettier — configured for LF — fails CI there.
+* text=auto eol=lf
+
+# Never touch binaries.
+*.png binary
+*.ico binary
+*.icns binary
+*.dmg binary
+*.zip binary
