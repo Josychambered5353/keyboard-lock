@@ -1,0 +1,255 @@
+/* Fullscreen overlay. Near-black so a bright screen does not fight the wiping,
+   with a slow accent bloom that makes it obvious the app is alive. */
+
+body.lock {
+  background: #05050a;
+  display: grid;
+  place-items: center;
+  cursor: none;
+}
+
+body.lock[data-mouse-unlock='true'] {
+  cursor: default;
+}
+
+.bloom {
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 38% at 30% 28%, var(--accent-glow) 0%, transparent 70%),
+    radial-gradient(42% 42% at 72% 74%, var(--accent-glow) 0%, transparent 72%);
+  opacity: 0.35;
+  filter: blur(40px);
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 2%, 0) scale(1.12);
+  }
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  animation: rise 500ms var(--ease) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dial {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: grid;
+  place-items: center;
+}
+
+.dial__svg {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.dial__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 3;
+}
+
+.dial__progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 12px var(--accent-glow));
+  transition: stroke-dashoffset 220ms linear;
+}
+
+.dial__time {
+  font-size: 58px;
+  font-weight: 200;
+  letter-spacing: -0.035em;
+  color: var(--text);
+}
+
+.headline {
+  text-align: center;
+}
+
+.headline__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.headline__subtitle {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+.lock-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 84px;
+}
+
+.hold--lock {
+  width: 260px;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.shortcut-hint {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
+
+/* Shown only when the OS kept some shortcuts for itself. */
+.notice {
+  position: fixed;
+  bottom: 52px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--warn);
+  opacity: 0.55;
+}
+
+.notice[hidden] {
+  display: none;
+}
+
+.stat {
+  position: fixed;
+  bottom: 26px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.16);
+}
+
+/* Secondary displays get the mark and the clock, nothing to interact with. */
+body.lock[data-primary='false'] .stage {
+  gap: 18px;
+}
+
+.mark {
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+/* ---------- outro ---------- */
+
+body.lock[data-finished='true'] .bloom {
+  opacity: 0.12;
+}
+
+.finish {
+  position: fixed;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #05050a;
+  animation: fade 260ms var(--ease) both;
+}
+
+body.lock[data-finished='true'] .finish {
+  display: flex;
+}
+
+body.lock[data-finished='true'] .stage,
+body.lock[data-finished='true'] /* Shown only when the OS kept some shortcuts for itself. */
+.notice {
+  position: fixed;
+  bottom: 52px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--warn);
+  opacity: 0.55;
+}
+
+.notice[hidden] {
+  display: none;
+}
+
+.stat {
+  display: none;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.finish__badge {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  animation: pop 380ms var(--ease) both;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.finish__title {
+  margin: 8px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.finish__hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-faint);
+}

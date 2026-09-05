@@ -1,0 +1,85 @@
+appId: com.keyboardlock.app
+productName: Keyboard Lock
+copyright: Copyright © Keyboard Lock Contributors
+
+directories:
+  buildResources: build
+  output: dist
+
+# Only the compiled output and the icon ship; sources stay in the repository.
+files:
+  - out/**/*
+  - build/icon.png
+  - package.json
+  - '!**/*.map'
+
+asar: true
+# The app has no native modules, so a rebuild would only slow the pipeline down.
+npmRebuild: false
+
+publish:
+  provider: github
+  releaseType: draft
+
+artifactName: ${name}-${version}-${os}-${arch}.${ext}
+
+mac:
+  category: public.app-category.utilities
+  icon: build/icon.png
+  darkModeSupport: true
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: false
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+      arch: [x64, arm64]
+
+dmg:
+  title: ${productName} ${version}
+  contents:
+    - x: 140
+      y: 190
+    - x: 400
+      y: 190
+      type: link
+      path: /Applications
+
+win:
+  icon: build/icon.png
+  target:
+    - target: nsis
+      arch: [x64, arm64]
+    - target: portable
+      arch: [x64]
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Keyboard Lock
+
+linux:
+  icon: build/icon.png
+  category: Utility
+  synopsis: Lock your keyboard for a set time so you can wipe it clean
+  description: >-
+    Keyboard Lock puts a dark fullscreen overlay on every display and swallows
+    every keystroke for a duration you choose, so you can wipe a laptop keyboard
+    without typing into your documents. Ends on a shortcut, on a held button, or
+    by itself.
+  desktop:
+    entry:
+      Keywords: keyboard;lock;clean;cleaning;utility;
+  target:
+    - target: AppImage
+      arch: [x64, arm64]
+    - target: deb
+      arch: [x64, arm64]
+    - target: rpm
+      arch: [x64]

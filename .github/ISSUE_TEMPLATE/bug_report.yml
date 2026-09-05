@@ -1,0 +1,54 @@
+name: Bug report
+description: Something does not work the way it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file this. If keys reached another app
+        while a lock was running, please say which app had focus — that detail
+        is usually what makes the difference.
+
+  - type: input
+    id: version
+    attributes:
+      label: Keyboard Lock version
+      description: Shown at the bottom of the settings screen.
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS version and desktop
+      placeholder: 'Ubuntu 24.04, GNOME on Wayland'
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: settings
+    attributes:
+      label: Relevant settings
+      description: Unlock shortcut, lock duration, whether system shortcuts are blocked.
+    validations:
+      required: false

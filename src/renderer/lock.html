@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-accent="indigo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' ws://localhost:* http://localhost:*"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard Lock</title>
+    <link rel="stylesheet" href="./styles/tokens.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/lock.css" />
+  </head>
+  <body class="lock" data-primary="true" data-finished="false">
+    <div class="bloom" aria-hidden="true"></div>
+
+    <main class="stage" role="status" aria-live="polite">
+      <div class="dial">
+        <svg class="dial__svg" viewBox="0 0 260 260" aria-hidden="true">
+          <circle class="dial__track" cx="130" cy="130" r="124" />
+          <circle class="dial__progress" id="dial-progress" cx="130" cy="130" r="124" />
+        </svg>
+        <output class="dial__time tabular" id="lock-time">00:00</output>
+      </div>
+
+      <div class="headline">
+        <h1 class="headline__title" data-i18n="lock.title"></h1>
+        <p class="headline__subtitle" id="lock-subtitle"></p>
+      </div>
+
+      <div class="lock-actions" id="lock-actions">
+        <button class="hold hold--lock" id="unlock-hold" type="button" hidden>
+          <span class="hold__fill"></span>
+          <span class="hold__label" data-i18n="lock.unlockButton"></span>
+        </button>
+        <p class="shortcut-hint" id="shortcut-hint"></p>
+      </div>
+    </main>
+
+    <p class="stat" id="blocked-count"></p>
+    <p class="notice" id="degraded-notice" data-i18n="notice.degraded" hidden></p>
+
+    <div class="finish">
+      <div class="finish__badge">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <h2 class="finish__title" data-i18n="lock.finished"></h2>
+      <p class="finish__hint" data-i18n="lock.finishedHint"></p>
+    </div>
+
+    <script type="module" src="./lock/index.ts"></script>
+  </body>
+</html>

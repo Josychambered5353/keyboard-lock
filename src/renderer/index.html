@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en" data-accent="indigo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' ws://localhost:* http://localhost:*"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard Lock</title>
+    <link rel="stylesheet" href="./styles/tokens.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/app.css" />
+  </head>
+  <body class="app">
+    <header class="titlebar">
+      <div class="titlebar__spacer"></div>
+      <button class="icon-button" id="open-settings" type="button" data-i18n-title="settings.title">
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+          />
+        </svg>
+      </button>
+      <div class="win-controls">
+        <button
+          class="icon-button"
+          id="minimize-window"
+          type="button"
+          data-i18n-title="common.minimize"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </button>
+        <button
+          class="icon-button icon-button--close"
+          id="close-window"
+          type="button"
+          data-i18n-title="common.close"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <!-- ---------- setup ---------- -->
+      <section class="view" id="view-setup">
+        <div class="brand">
+          <div class="brand__mark">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="6" width="20" height="12" rx="2.5" />
+              <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01" />
+              <path d="M9.5 14h5" />
+            </svg>
+          </div>
+          <h1 class="brand__name">Keyboard Lock</h1>
+          <p class="brand__tagline" data-i18n="app.tagline"></p>
+        </div>
+
+        <div class="duration">
+          <span class="duration__label" data-i18n="setup.duration"></span>
+          <output class="duration__value tabular" id="duration-value" for="duration-slider"
+            >01:00</output
+          >
+          <p class="duration__hint" id="duration-hint"></p>
+
+          <input
+            class="slider"
+            id="duration-slider"
+            type="range"
+            min="0"
+            max="18"
+            step="1"
+            value="5"
+            data-i18n-aria-label="setup.duration"
+          />
+
+          <div class="presets" id="presets" role="group" data-i18n-aria-label="setup.presets"></div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="unlock-note">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="3" y="11" width="18" height="10" rx="2" />
+            <path d="M8 11V7a4 4 0 0 1 8 0" />
+          </svg>
+          <span id="unlock-note-text"></span>
+        </div>
+
+        <button
+          class="button button--primary"
+          id="start-lock"
+          type="button"
+          data-i18n="setup.start"
+        ></button>
+      </section>
+
+      <!-- ---------- confirm ---------- -->
+      <section class="view confirm" id="view-confirm" hidden>
+        <div class="confirm__icon">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 9v4" />
+            <path d="M12 17h.01" />
+            <path
+              d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"
+            />
+          </svg>
+        </div>
+        <div>
+          <h2 class="confirm__title" data-i18n="confirm.title"></h2>
+          <output class="confirm__duration tabular" id="confirm-duration">05:00</output>
+        </div>
+        <p class="confirm__body" id="confirm-body"></p>
+
+        <div class="spacer"></div>
+
+        <button class="hold" id="confirm-hold" type="button">
+          <span class="hold__fill"></span>
+          <span class="hold__label" data-i18n="confirm.hold"></span>
+        </button>
+        <button
+          class="button button--ghost"
+          id="confirm-back"
+          type="button"
+          data-i18n="confirm.back"
+        ></button>
+      </section>
+
+      <!-- ---------- settings ---------- -->
+      <section class="view settings" id="view-settings" hidden>
+        <header class="settings__header">
+          <button
+            class="icon-button"
+            id="close-settings"
+            type="button"
+            data-i18n-title="settings.done"
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <h2 class="settings__title" data-i18n="settings.title"></h2>
+        </header>
+
+        <div class="settings__scroll">
+          <div class="group">
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.language"></div>
+              </div>
+              <select class="select" id="setting-locale"></select>
+            </div>
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.accent"></div>
+              </div>
+              <div class="accents" id="setting-accent" role="group"></div>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.unlockShortcut"></div>
+                <div class="row__hint" id="shortcut-hint"></div>
+              </div>
+              <button class="shortcut-button" id="setting-shortcut" type="button"></button>
+            </div>
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.mouseUnlock"></div>
+                <div class="row__hint" id="mouse-unlock-hint"></div>
+              </div>
+              <button class="switch" id="setting-mouse-unlock" type="button" role="switch"></button>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.confirmThreshold"></div>
+              </div>
+              <select class="select" id="setting-confirm"></select>
+            </div>
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.blockSystemShortcuts"></div>
+                <div class="row__hint" data-i18n="settings.blockSystemShortcutsHint"></div>
+              </div>
+              <button
+                class="switch"
+                id="setting-block-shortcuts"
+                type="button"
+                role="switch"
+              ></button>
+            </div>
+            <div class="row">
+              <div class="row__text">
+                <div class="row__label" data-i18n="settings.keepAwake"></div>
+              </div>
+              <button class="switch" id="setting-keep-awake" type="button" role="switch"></button>
+            </div>
+            <div class="row">
+              <div class="row__text"><div class="row__label" data-i18n="settings.sound"></div></div>
+              <button class="switch" id="setting-sound" type="button" role="switch"></button>
+            </div>
+          </div>
+
+          <button
+            class="text-button"
+            id="setting-reset"
+            type="button"
+            data-i18n="settings.reset"
+          ></button>
+        </div>
+
+        <footer class="settings__footer">
+          <span id="version-label"></span>
+          <a class="link" id="source-link" href="#" data-i18n="settings.sourceCode"></a>
+        </footer>
+      </section>
+    </main>
+
+    <script type="module" src="./main/index.ts"></script>
+  </body>
+</html>

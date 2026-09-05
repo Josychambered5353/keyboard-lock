@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "src/main/**/*.ts",
+    "src/preload/**/*.ts",
+    "src/shared/**/*.ts",
+    "src/shared/**/*.json",
+    "tests/**/*.ts",
+    "scripts/**/*.mjs",
+    "electron.vite.config.ts"
+  ],
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node", "electron-vite/node"],
+    "allowJs": true,
+    "paths": {
+      "@shared/*": ["./src/shared/*"]
+    },
+    "outDir": "node_modules/.cache/tsc/node",
+    "tsBuildInfoFile": "node_modules/.cache/tsc/node.tsbuildinfo"
+  }
+}

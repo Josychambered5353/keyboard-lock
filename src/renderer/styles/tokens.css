@@ -1,0 +1,66 @@
+/* Design tokens. One dark palette, five accents, no light theme:
+   the app is meant to sit quietly in front of a keyboard being wiped. */
+:root {
+  --bg: #0a0b0f;
+  --bg-glow: #12141d;
+  --surface: #14161e;
+  --surface-2: #191c26;
+  --surface-3: #1f2330;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.13);
+
+  --text: #eef0f6;
+  --text-dim: #9aa1b2;
+  --text-faint: #626a7c;
+
+  --danger: #ff6b6b;
+  --warn: #ffb454;
+
+  --accent: #6c8cff;
+  --accent-ink: #ffffff;
+  --accent-glow: rgba(108, 140, 255, 0.35);
+  --accent-soft: rgba(108, 140, 255, 0.14);
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --fast: 140ms var(--ease);
+  --normal: 240ms var(--ease);
+
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 14px 40px rgba(0, 0, 0, 0.55);
+
+  --font:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI Variable Text', 'Segoe UI', Inter, system-ui,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+}
+
+:root[data-accent='teal'] {
+  --accent: #2dd4bf;
+  --accent-ink: #04231f;
+  --accent-glow: rgba(45, 212, 191, 0.35);
+  --accent-soft: rgba(45, 212, 191, 0.14);
+}
+
+:root[data-accent='violet'] {
+  --accent: #a78bfa;
+  --accent-ink: #17102e;
+  --accent-glow: rgba(167, 139, 250, 0.35);
+  --accent-soft: rgba(167, 139, 250, 0.14);
+}
+
+:root[data-accent='amber'] {
+  --accent: #fbbf5c;
+  --accent-ink: #2b1c02;
+  --accent-glow: rgba(251, 191, 92, 0.35);
+  --accent-soft: rgba(251, 191, 92, 0.14);
+}
+
+:root[data-accent='rose'] {
+  --accent: #fb7185;
+  --accent-ink: #2d0710;
+  --accent-glow: rgba(251, 113, 133, 0.35);
+  --accent-soft: rgba(251, 113, 133, 0.14);
+}
